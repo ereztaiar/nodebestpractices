@@ -1,16 +1,16 @@
 [✔]: assets/images/checkbox-small-blue.png
 
 <div style="text-align: right" dir="rtl">
-# Node.js Best Practices
+# Node.js שיטות מומלצות
 
 <h1 align="center">
-  <img src="assets/images/banner-2.jpg" alt="Node.js Best Practices" />
+  <img src="assets/images/banner-2.jpg" alt="Node.js שיטות מומלצות" />
 </h1>
 
 <br/>
 
 <div align="center">
-<img src="https://img.shields.io/badge/⚙%20Item%20count%20-%2053%20Best%20practices-blue.svg" alt="53 items"> <img src="https://img.shields.io/badge/%F0%9F%93%85%20Last%20update%20-%20Nov%2015%202017-green.svg" alt="Last update: Nov 15, 2017"> <img src="https://img.shields.io/badge/%E2%9C%94%20Updated%20For%20Version%20-%20Node%208.9-brightgreen.svg" alt="Updated for Node v.8.9">
+<img src="https://img.shields.io/badge/⚙%20Item%20count%20-%2053%20Best%20practices-blue.svg" alt="53 items"> <img src="https://img.shields.io/badge/%F0%9F%93%85%20Last%20update%20-%20Nov%2015%202017-green.svg" alt="Last update: Nov 15, 2017"> <img src="https://img.shields.io/badge/%E2%9C%94%20Updated%20For%20Version%20-%20Node%208.9-brightgreen.svg" alt="מעודכן ל -  Node v.8.9">
 	</div>
 
 <br/>
@@ -57,8 +57,6 @@
 
 **אמ;לק:** כל רכיב צריך להחיל 'שכבות' - אוביקט המיועד לרשת, קוד גישה למידע וללוגיקה. זה לא רק מאפשר הפרדה של מטלות אלא גם מקל בצורה משמעותית על בדיקות והדמיות של המערכת. למרות שמדובר בתבנית מאוד מקובלת, מפתחי API נוטים לשלב שכבות על ידי העברת השכבות המיועדות לרשת (Express req, res) לשכבה הלוגית והמידע - זה גורם לאפליקציה שלך להיות תלויה ונגישה על ידי Express בלבד. 
 
-**אחרת:** App that mixes web objects with other layers can not be accessed by testing code, CRON jobs and other non-Express callers
-
 **אחרת:** אפליקציה שמשלבת רכיבי רשת עם שכבות אחרות לא מאפשרת גישה לקוד בדיקות, פעילותCRON ורכיבים קוראים שאינם Express.
 
 
@@ -67,39 +65,41 @@
 
 <br/><br/>
 
-## ![✔] 1.3 Wrap common utilities as NPM packages
+## ![✔] 1.3 עטוף משימות משוטפות כחבילות NPM
 
-**אמ;לק:** In a large app that constitutes a large code base, cross-cutting-concern utilities like logger, encryption and alike, should be wrapped by your own code and exposed as private NPM packages. This allows sharing them among multiple code bases and projects
+**אמ;לק:** באפליקציה גדולה שמכילה בסיס קוד רב, רכיבי שירות גלובלים כגון לוגר, הצפנה וכדומה, צריכים להיות עטופים על ידי קוד משלהם ולהיות חשופים כחבילות NPM פרטיות. זה מאפשר שיתוף שלהם בין בסיסי קוד ופרויקטים רבים.
 
-**אחרת:** You'll have to invent your own deployment and dependency wheel
+**אחרת:** תצטרך להמציא פריסה ותלות משל עצמך
 
-🔗 [**Read More: Structure by feature**](/sections/projectstructre/wraputilities.md)
 
-<br/><br/>
-
-## ![✔] 1.4 Separate Express 'app' and 'server'
-
-**אמ;לק:** Avoid the nasty habit of defining the entire [Express](https://expressjs.com/) app in a single huge file - separate your 'Express' definition to at least two files: the API declaration (app.js) and the networking concerns (WWW). For even better structure, locate your API declaration within components
-
-**אחרת:** Your API will be accessible for testing via HTTP calls only (slower and much harder to generate coverage reports). It probably won't be a big pleasure to maintain hundreds of lines of code in a single file
-
-🔗 [**Read More: separate Express 'app' and 'server'**](/sections/projectstructre/separateexpress.md)
+🔗 [**קרא עוד: מבנה לפי תכונה**](/sections/projectstructre/wraputilities.md)
 
 <br/><br/>
 
-## ![✔] 1.5 Use environment aware, secure and hierarchical config
+## ![✔] 1.4 הפרדת 'שרת' ו'אפליקציה' Express
+
+**אמ;לק:** המנע מההרגל הרע להגדיר את כלל האפליקציה בקובץ ענק בודד - [Express](https://expressjs.com/) - הפרד את הגדרות ה - 'Express' ללפחות שני קבצים: הגדרות ה -  API (app.js) ותהליכי הרשת (WWW). בשביל מבנה טוב יותר, אתר את הגדרות ה - API בתוך הרכיבים.  
+
+**אחרת:** ה-  API שלך יהיה זמין לבדיקות דרך קריאות HTTP בלבד (איטי יותר וקשה יותר לביצוע דוחות סיקור). זה כנראה לא יהיה מהנה במיוחד לתחזק מאות שורות קוד בקובץ בודד.
 
 
-**אמ;לק:** A perfect and flawless configuration setup should ensure (a) keys can be read from file AND from environment variable (b) secrets are kept outside committed code (c) config is hierarchical for easier findability. There are a few packages that can help tick most of those boxes like [rc](https://www.npmjs.com/package/rc), [nconf](https://www.npmjs.com/package/nconf) and [config](https://www.npmjs.com/package/config).
+🔗 [**קרא עוד: הפרדת 'שרת' ו'אפליקציה' Express**](/sections/projectstructre/separateexpress.md)
 
-**אחרת:** Failing to satisfy any of the config requirements will simply bog down the development or devops team. Probably both
+<br/><br/>
 
-🔗 [**Read More: configuration best practices**](/sections/projectstructre/configguide.md)
+## ![✔] 1.5 השתמש בהגדרות מונחות אבטחה והיררכיה
+
+**אמ;לק:** קונפיגורציה מושלמת וללא פגם צריכה להבטיח (א) ניתן לקרוא מפתחות מקובץ וממשתני סביבה (ב) סודות שומרים מחוץ לקוד מנוהל במערכת בקרת גרסאות (ג) הגדרות בנויות בהיררכיה כדי להקל על מציאה. יש מספר חבילות שיכולות לסייע ברוב המקרים האלו כגון [rc](https://www.npmjs.com/package/rc), [nconf](https://www.npmjs.com/package/nconf) ו [config](https://www.npmjs.com/package/config).
+
+**אחרת:** כישלון לקיים אחד מדרישות האלה יגרום לקריסת הפיתוח וצוות הדבאופס. ככל הנראה שניהם.
+
+
+🔗 [**קרא עוד: שיטות מומלצות להגדרות**](/sections/projectstructre/configguide.md)
 
 
 <br/><br/><br/>
 
-<p align="right"><a href="#table-of-contents">⬆ Return to top</a></p>
+<p align="right"><a href="#table-of-contents">⬆ חזור למעלה</a></p>
 
 # `2. Error Handling Practices`
 
@@ -109,7 +109,7 @@
 
 **אחרת:** Node.js callback style, function(err, response), is a promising way to un-maintainable code due to the mix of error handling with casual code, excessive nesting and awkward coding patterns
 
-🔗 [**Read More: avoiding callbacks**](/sections/errorhandling/asyncerrorhandling.md)
+🔗 [**קרא עוד: avoiding callbacks**](/sections/errorhandling/asyncerrorhandling.md)
 
 <br/><br/>
 
@@ -120,7 +120,7 @@
 
 **אחרת:** When invoking some component, being uncertain which type of errors come in return – it makes proper error handling much harder. Even worse, using custom types to describe errors might lead to loss of critical error information like the stack trace!
 
-🔗 [**Read More: using the built-in error object**](/sections/errorhandling/useonlythebuiltinerror.md)
+🔗 [**קרא עוד: using the built-in error object**](/sections/errorhandling/useonlythebuiltinerror.md)
 
 <br/><br/>
 
@@ -130,7 +130,7 @@
 
 **אחרת:** You may always restart the application when an error appears, but why let ~5000 online users down because of a minor, predicted, operational error? the opposite is also not ideal – keeping the application up when an unknown issue (programmer error) occurred might lead to an unpredicted behavior. Differentiating the two allows acting tactfully and applying a balanced approach based on the given context
 
-  🔗 [**Read More: operational vs programmer error**](/sections/errorhandling/operationalvsprogrammererror.md)
+  🔗 [**קרא עוד: operational vs programmer error**](/sections/errorhandling/operationalvsprogrammererror.md)
 
 <br/><br/>
 
@@ -140,7 +140,7 @@
 
 **אחרת:** Not handling errors within a single place will lead to code duplication and probably to improperly handled errors
 
-🔗 [**Read More: handling errors in a centralized place**](/sections/errorhandling/centralizedhandling.md)
+🔗 [**קרא עוד: handling errors in a centralized place**](/sections/errorhandling/centralizedhandling.md)
 
 <br/><br/>
 
@@ -151,7 +151,7 @@
 **אחרת:** An API client might decide to crash and restart only because he received back an error he couldn’t understand. Note: the caller of your API might be you (very typical in a microservice environment)
 
 
-🔗 [**Read More: documenting errors in Swagger**](/sections/errorhandling/documentingusingswagger.md)
+🔗 [**קרא עוד: documenting errors in Swagger**](/sections/errorhandling/documentingusingswagger.md)
 
 <br/><br/>
 
@@ -161,7 +161,7 @@
 
 **אחרת:** When an unfamiliar exception is caught, some object might be in a faulty state (e.g an event emitter which is used globally and not firing events anymore due to some internal failure) and all future requests might fail or behave crazily
 
-🔗 [**Read More: shutting the process**](/sections/errorhandling/shuttingtheprocess.md)
+🔗 [**קרא עוד: shutting the process**](/sections/errorhandling/shuttingtheprocess.md)
 
 <br/><br/>
 
@@ -173,7 +173,7 @@
 
 **אחרת:** Skimming through console.logs or manually through messy text file without querying tools or a decent log viewer might keep you busy at work until late
 
-🔗 [**Read More: using a mature logger**](/sections/errorhandling/usematurelogger.md)
+🔗 [**קרא עוד: using a mature logger**](/sections/errorhandling/usematurelogger.md)
 
 
 <br/><br/>
@@ -186,7 +186,7 @@
 **אחרת:** Without testing, whether automatically or manually, you can’t rely on our code to return the right errors. Without meaningful errors – there’s no error handling
 
 
-🔗 [**Read More: testing error flows**](/sections/errorhandling/testingerrorflows.md)
+🔗 [**קרא עוד: testing error flows**](/sections/errorhandling/testingerrorflows.md)
 
 <br/><br/>
 
@@ -197,7 +197,7 @@
 **אחרת:** You might spend great effort on measuring API performance and downtimes, probably you’ll never be aware which are your slowest code parts under real world scenario and how these affects the UX
 
 
-🔗 [**Read More: using APM products**](/sections/errorhandling/apmproducts.md)
+🔗 [**קרא עוד: using APM products**](/sections/errorhandling/apmproducts.md)
 
 <br/><br/>
 
@@ -209,7 +209,7 @@
 **אחרת:** Your errors will get swallowed and leave no trace. Nothing to worry about
 
 
-🔗 [**Read More: catching unhandled promise rejection**](/sections/errorhandling/catchunhandledpromiserejection.md)
+🔗 [**קרא עוד: catching unhandled promise rejection**](/sections/errorhandling/catchunhandledpromiserejection.md)
 
 <br/><br/>
 
@@ -219,7 +219,7 @@
 
 **אחרת:** Consider this – your function expects a numeric argument “Discount” which the caller forgets to pass, later on your code checks if Discount!=0 (amount of allowed discount is greater than zero), then it will allow the user to enjoy a discount. OMG, what a nasty bug. Can you see it?
 
-🔗 [**Read More: failing fast**](/sections/errorhandling/failfast.md)
+🔗 [**קרא עוד: failing fast**](/sections/errorhandling/failfast.md)
 
 <br/><br/><br/>
 
@@ -263,7 +263,7 @@
 
 **אחרת:** Deferring from this best practice might lead to unexpected results, as seen in the Stackoverflow thread below:
 
-🔗 [**Read more:** "Why does a results vary based on curly brace placement?" (Stackoverflow)](https://stackoverflow.com/questions/3641519/why-does-a-results-vary-based-on-curly-brace-placement)
+🔗 [**קרא עוד:** "Why does a results vary based on curly brace placement?" (Stackoverflow)](https://stackoverflow.com/questions/3641519/why-does-a-results-vary-based-on-curly-brace-placement)
 
 <br/><br/>
 
@@ -312,7 +312,7 @@
 
 **אחרת:** Debugging becomes way more cumbersome when following a variable that frequently changes.
 
-🔗 [**Read more: JavaScript ES6+: var, let, or const?** ](https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75)
+🔗 [**קרא עוד: JavaScript ES6+: var, let, or const?** ](https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75)
 
 <br/><br/>
 
@@ -378,7 +378,7 @@ All statements above will return false if used with `===`
 
 **אחרת:** Handling async errors in callback style is probably the fastest way to hell - this style forces to check errors all over, deal with awkward code nesting and make it difficult to reason about the code flow.
 
-🔗[**Read more:** Guide to async await 1.0](https://github.com/yortus/asyncawait)
+🔗[**קרא עוד:** Guide to async await 1.0](https://github.com/yortus/asyncawait)
 
 <br/><br/>
 
@@ -421,7 +421,7 @@ All statements above will return false if used with `===`
 
 **אחרת:** Choosing some niche vendor might get you blocked once you need some advanced customization. On the other hand, going with Jenkins might burn precious time on infrastructure setup
 
-🔗 [**Read More: Choosing CI platform**](/sections/testingandquality/citools.md)
+🔗 [**קרא עוד: Choosing CI platform**](/sections/testingandquality/citools.md)
 
 <br/><br/>
 
@@ -479,7 +479,7 @@ All statements above will return false if used with `===`
 **אחרת:** Failure === disappointed customers. Simple.
 
 
-🔗 [**Read More: Monitoring!**](/sections/production/monitoring.md)
+🔗 [**קרא עוד: Monitoring!**](/sections/production/monitoring.md)
 
 <br/><br/>
 
@@ -490,7 +490,7 @@ All statements above will return false if used with `===`
 **אחרת:** You end-up with a blackbox that is hard to reason about, then you start re-writing all logging statements to add additional information
 
 
-🔗 [**Read More: Increase transparency using smart logging**](/sections/production/smartlogging.md)
+🔗 [**קרא עוד: Increase transparency using smart logging**](/sections/production/smartlogging.md)
 	
 <br/><br/>
 
@@ -501,7 +501,7 @@ All statements above will return false if used with `===`
 **אחרת:** Your poor single thread will stay busy doing infrastructural tasks instead of dealing with your application core and performance will degrade accordingly
 
 
-🔗 [**Read More: Delegate anything possible (e.g. gzip, SSL) to a reverse proxy**](/sections/production/delegatetoproxy.md)
+🔗 [**קרא עוד: Delegate anything possible (e.g. gzip, SSL) to a reverse proxy**](/sections/production/delegatetoproxy.md)
 
 <br/><br/>
 
@@ -512,7 +512,7 @@ All statements above will return false if used with `===`
 **אחרת:** QA will thoroughly test the code and approve a version that will behave differently at production. Even worse, different servers at the same production cluster might run different code
 
 
-🔗 [**Read More: Lock dependencies**](/sections/production/lockdependencies.md)
+🔗 [**קרא עוד: Lock dependencies**](/sections/production/lockdependencies.md)
 
 <br/><br/>
 
@@ -523,7 +523,7 @@ All statements above will return false if used with `===`
 **אחרת:** Running dozens of instances without clear strategy and too many tools together (cluster management, docker, PM2) might lead to a devops chaos
 
 
-🔗 [**Read More: Guard process uptime using the right tool**](/sections/production/guardprocess.md)
+🔗 [**קרא עוד: Guard process uptime using the right tool**](/sections/production/guardprocess.md)
 
  
 <br/><br/>
@@ -535,7 +535,7 @@ All statements above will return false if used with `===`
 **אחרת:** Your app will likely utilize only 25% of its available resources(!) or even less. Note that a typical server has 4 CPU cores or more, naive deployment of Node.js utilizes only 1 (even using PaaS services like AWS beanstalk!)
 
 
-🔗 [**Read More: Utilize all CPU cores**](/sections/production/utilizecpu.md)
+🔗 [**קרא עוד: Utilize all CPU cores**](/sections/production/utilizecpu.md)
 
 <br/><br/>
 
@@ -546,7 +546,7 @@ All statements above will return false if used with `===`
 **אחרת:** You’ll find that you’re performing many “diagnostic deploys” – shipping code to production only to extract some information for diagnostic purposes
 
 
-🔗 [**Read More: Create a ‘maintenance endpoint’**](/sections/production/createmaintenanceendpoint.md)
+🔗 [**קרא עוד: Create a ‘maintenance endpoint’**](/sections/production/createmaintenanceendpoint.md)
 
 <br/><br/>
 
@@ -557,7 +557,7 @@ All statements above will return false if used with `===`
 **אחרת:** You might spend great effort on measuring API performance and downtimes, probably you’ll never be aware which is your slowest code parts under real world scenario and how these affects the UX
 
 
-🔗 [**Read More: Discover errors and downtime using APM products**](/sections/production/apmproducts.md)
+🔗 [**קרא עוד: Discover errors and downtime using APM products**](/sections/production/apmproducts.md)
 
 
 <br/><br/>
@@ -570,7 +570,7 @@ All statements above will return false if used with `===`
 **אחרת:** A world champion IT/devops guy won’t save a system that is badly written
 
 
-🔗 [**Read More: Make your code production-ready**](/sections/production/productoncode.md)
+🔗 [**קרא עוד: Make your code production-ready**](/sections/production/productoncode.md)
 
 <br/><br/>
 
@@ -581,7 +581,7 @@ All statements above will return false if used with `===`
 **אחרת:** Your process memory might leak a hundred megabytes a day like happened in Wallmart
 
 
-🔗 [**Read More: Measure and guard the memory usage**](/sections/production/measurememory.md)
+🔗 [**קרא עוד: Measure and guard the memory usage**](/sections/production/measurememory.md)
 
 <br/><br/>
 
@@ -593,7 +593,7 @@ All statements above will return false if used with `===`
 **אחרת:** Your single Node thread will be busy streaming hundreds of html/images/angular/react files instead of  allocating all its resources for the task it was born for – serving dynamic content
 
 
-🔗 [**Read More: Get your frontend assets out of Node**](/sections/production/frontendout.md)
+🔗 [**קרא עוד: Get your frontend assets out of Node**](/sections/production/frontendout.md)
 
 <br/><br/>
 
@@ -605,7 +605,7 @@ All statements above will return false if used with `===`
 **אחרת:** Failure at a given server will result in application downtime instead of just killing a faulty machine. Moreover, scaling-out elasticity will get more challenging due to the reliance on a specific server
 
 
-🔗 [**Read More: Be stateless, kill your Servers almost every day**](/sections/production/bestateless.md)
+🔗 [**קרא עוד: Be stateless, kill your Servers almost every day**](/sections/production/bestateless.md)
 
 
 <br/><br/>
@@ -618,7 +618,7 @@ All statements above will return false if used with `===`
 **אחרת:** אחרת: Keeping your code clean from vulnerabilities without dedicated tools will require to constantly follow online publications about new threats. Quite tedious
 
 
-🔗 [**Read More: Use tools that automatically detect vulnerabilities**](/sections/production/detectvulnerabilities.md)
+🔗 [**קרא עוד: Use tools that automatically detect vulnerabilities**](/sections/production/detectvulnerabilities.md)
 
 <br/><br/>
 
@@ -630,7 +630,7 @@ All statements above will return false if used with `===`
 **אחרת:** Looking at a production error log without the context – what happened before – makes it much harder and slower to reason about the issue
 
 
-🔗 [**Read More: Assign ‘TransactionId’ to each log statement**](/sections/production/assigntransactionid.md)
+🔗 [**קרא עוד: Assign ‘TransactionId’ to each log statement**](/sections/production/assigntransactionid.md)
 
 <br/><br/>
 
@@ -642,7 +642,7 @@ All statements above will return false if used with `===`
 **אחרת:** Omitting this simple property might greatly degrade performance. For example, when using Express for server side rendering omitting NODE_ENV makes the slower by a factor of three!
 
 
-🔗 [**Read More: Set NODE_ENV=production**](/sections/production/setnodeenv.md)
+🔗 [**קרא עוד: Set NODE_ENV=production**](/sections/production/setnodeenv.md)
 
 
 <br/><br/>
